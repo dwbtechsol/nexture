@@ -1,0 +1,1153 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nexture Consulting — Transforming Complexity V6</title>
+  <meta name="description" content="Nexture Consulting connects strategy, leadership, technology and delivery to transform complexity into business value.">
+  <link rel="icon" href="data:,">
+  <script>
+    (() => {
+      const param = new URLSearchParams(window.location.search).get("scoutTheme");
+      const theme =
+        param || (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+      document.documentElement.setAttribute("data-theme", theme);
+    })();
+  </script>
+  <style>
+    :root {
+      color-scheme: light;
+      --cp-bg: #f7f4ef;
+      --cp-bg-elevated: #fcfbf8;
+      --cp-surface: #ffffff;
+      --cp-surface-soft: #f5f5f5;
+      --cp-border: #dedede;
+      --cp-border-strong: #919191;
+      --cp-text: #242424;
+      --cp-text-muted: #5c5c5c;
+      --cp-text-soft: #6f6f6f;
+      --cp-accent: #b11f4b;
+      --cp-accent-hover: #9a1a41;
+      --cp-accent-soft: rgba(177, 31, 75, 0.08);
+      --cp-accent-fg: #ffffff;
+      --cp-success: #16a34a;
+      --cp-danger: #dc2626;
+      --cp-warning: #f59e0b;
+      --cp-link: #0078d4;
+      --cp-shadow: 0 18px 48px rgba(0, 0, 0, 0.12);
+      --cp-overlay: rgba(255, 255, 255, 0.8);
+      --cp-panel: rgba(255, 255, 255, 0.86);
+      --cp-panel-strong: rgba(255, 255, 255, 0.96);
+      --cp-sheen: rgba(255, 255, 255, 0.55);
+      --cp-highlight: rgba(177, 31, 75, 0.12);
+    }
+    html[data-theme="dark"] {
+      color-scheme: dark;
+      --cp-bg: #3d3b3a;
+      --cp-bg-elevated: #343231;
+      --cp-surface: #292929;
+      --cp-surface-soft: #2e2e2e;
+      --cp-border: #474747;
+      --cp-border-strong: #5f5f5f;
+      --cp-text: #dedede;
+      --cp-text-muted: #919191;
+      --cp-text-soft: #b0b0b0;
+      --cp-accent: #fd8ea1;
+      --cp-accent-hover: #fb7b91;
+      --cp-accent-soft: rgba(253, 142, 161, 0.14);
+      --cp-accent-fg: #1a1a1a;
+      --cp-success: #4ade80;
+      --cp-danger: #f87171;
+      --cp-warning: #fbbf24;
+      --cp-link: #4da6ff;
+      --cp-shadow: 0 18px 48px rgba(0, 0, 0, 0.32);
+      --cp-overlay: rgba(41, 41, 41, 0.88);
+      --cp-panel: rgba(41, 41, 41, 0.72);
+      --cp-panel-strong: rgba(41, 41, 41, 0.96);
+      --cp-sheen: rgba(255, 255, 255, 0.04);
+      --cp-highlight: rgba(253, 142, 161, 0.12);
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      overflow-x: hidden;
+      background: var(--cp-bg);
+      color: var(--cp-text);
+      font-family: "Segoe UI", Aptos, Calibri, -apple-system, BlinkMacSystemFont, sans-serif;
+      line-height: 1.5;
+    }
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: -2;
+      pointer-events: none;
+      background:
+        radial-gradient(circle at 10% 8%, var(--cp-highlight), transparent 27%),
+        radial-gradient(circle at 90% 24%, var(--cp-accent-soft), transparent 24%),
+        var(--cp-bg);
+    }
+    a { color: inherit; text-decoration: none; }
+    button { color: inherit; font: inherit; }
+    .shell { width: min(1240px, calc(100% - 48px)); margin: 0 auto; }
+    .label {
+      display: inline-flex; align-items: center; gap: 9px; color: var(--cp-accent);
+      font-size: 0.72rem; font-weight: 800; letter-spacing: 0.16em; text-transform: uppercase;
+    }
+    .label::before { content: ""; width: 26px; height: 2px; background: var(--cp-accent); }
+    .muted { color: var(--cp-text-muted); }
+    .gradient-text {
+      color: var(--cp-accent);
+      background: linear-gradient(100deg, var(--cp-accent), var(--cp-warning), var(--cp-link), var(--cp-accent));
+      background-size: 300% 100%; background-clip: text; -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent; animation: gradient-shift 8s linear infinite;
+    }
+    .progress { position: fixed; inset: 0 auto auto 0; z-index: 80; width: 0; height: 3px; background: linear-gradient(90deg, var(--cp-accent), var(--cp-warning), var(--cp-success), var(--cp-link)); }
+
+    nav { position: fixed; inset: 14px 0 auto; z-index: 70; pointer-events: none; }
+    .nav-wrap {
+      min-height: 62px; padding: 7px 9px 7px 17px; border: 1px solid var(--cp-border); border-radius: 16px;
+      display: flex; align-items: center; justify-content: space-between; gap: 24px;
+      background: var(--cp-panel); box-shadow: 0 0 2px var(--cp-border), 0 1px 2px var(--cp-border);
+      backdrop-filter: blur(18px); pointer-events: auto;
+    }
+    .brand { display: flex; align-items: center; gap: 12px; font-size: 0.84rem; font-weight: 800; letter-spacing: 0.09em; }
+    .mark { width: 44px; height: 40px; display: grid; place-items: center; position: relative; }
+    .mark img { display: block; width: 100%; height: 100%; object-fit: contain; }
+    .nav-links { display: flex; align-items: center; gap: 25px; font-size: 0.85rem; }
+    .nav-links > a:not(.button) { position: relative; }
+    .nav-links > a:not(.button)::after { content: ""; position: absolute; left: 0; right: 100%; bottom: -6px; height: 2px; background: var(--cp-accent); transition: right 180ms ease; }
+    .nav-links > a:hover::after { right: 0; }
+    .button {
+      min-height: 46px; padding: 0 20px; border: 1px solid var(--cp-text); border-radius: 0.625rem;
+      display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+      background: var(--cp-text); color: var(--cp-bg); font-weight: 700; cursor: pointer;
+      transition: transform 180ms ease, background 180ms ease, color 180ms ease;
+    }
+    .button:hover { transform: translateY(-3px); background: var(--cp-accent); color: var(--cp-accent-fg); border-color: var(--cp-accent); }
+    .button.light { background: transparent; color: var(--cp-text); border-color: var(--cp-border-strong); }
+    .button .arrow { transition: transform 180ms ease; }
+    .button:hover .arrow { transform: translate(3px, -3px); }
+
+    .cinematic {
+      --cinematic-bg: var(--cp-text);
+      --cinematic-fg: var(--cp-bg);
+      --cinematic-muted: var(--cp-border);
+      min-height: 100svh;
+      position: relative;
+      overflow: hidden;
+      display: grid;
+      place-items: center;
+      background: var(--cinematic-bg);
+      color: var(--cinematic-fg);
+    }
+    html[data-theme="dark"] .cinematic {
+      --cinematic-bg: var(--cp-surface);
+      --cinematic-fg: var(--cp-text);
+      --cinematic-muted: var(--cp-text-soft);
+    }
+    .cinematic-grid {
+      position: absolute;
+      inset: 0;
+      opacity: 0.18;
+      background:
+        linear-gradient(90deg, transparent 49%, var(--cp-border-strong) 50%, transparent 51%),
+        linear-gradient(0deg, transparent 49%, var(--cp-border-strong) 50%, transparent 51%);
+      background-size: 64px 64px;
+      animation: grid-drift 16s linear infinite;
+    }
+    .cinematic-glow {
+      position: absolute;
+      width: min(70vw, 900px);
+      aspect-ratio: 1;
+      border-radius: 50%;
+      background: radial-gradient(circle, var(--cp-highlight), transparent 66%);
+      animation: cinematic-breathe 6s ease-in-out infinite;
+    }
+    .signal-world { position: relative; width: min(92vw, 1120px); height: min(78vh, 760px); }
+    .signal-world svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+    .raw-path {
+      fill: none;
+      stroke: var(--cp-border-strong);
+      stroke-width: 1.2;
+      opacity: 0.34;
+      stroke-dasharray: 7 12;
+      animation: raw-signal 7s linear infinite;
+    }
+    .value-path {
+      fill: none;
+      stroke: url("#valueGradient");
+      stroke-width: 3;
+      stroke-linecap: round;
+      stroke-dasharray: 0 1200;
+      animation: draw-value 7.2s cubic-bezier(.2,.8,.2,1) infinite;
+      filter: drop-shadow(0 0 7px var(--cp-accent));
+    }
+    .signal-particle { fill: var(--particle-color); filter: drop-shadow(0 0 6px var(--particle-color)); }
+    .signal-particle.p1 { --particle-color: var(--cp-accent); offset-path: path("M70 105 C240 40 220 350 440 345 S650 140 780 240 S910 470 1050 350"); animation: particle-flow 6s linear infinite; }
+    .signal-particle.p2 { --particle-color: var(--cp-warning); offset-path: path("M80 560 C250 670 310 410 445 350 S620 360 780 245 S900 120 1040 190"); animation: particle-flow 7.3s linear -2s infinite; }
+    .signal-particle.p3 { --particle-color: var(--cp-link); offset-path: path("M50 330 C220 180 310 510 445 350 S640 210 780 245 S920 340 1070 90"); animation: particle-flow 6.6s linear -4s infinite; }
+    .signal-particle.p4 { --particle-color: var(--cp-success); offset-path: path("M120 210 C260 300 320 280 445 350 S630 500 780 245 S930 210 1030 530"); animation: particle-flow 8s linear -1s infinite; }
+    .cinematic-core {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      width: 168px;
+      height: 168px;
+      transform: translate(-50%, -50%);
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      text-align: center;
+      background: linear-gradient(135deg, var(--cp-accent), var(--cp-warning));
+      color: var(--cp-accent-fg);
+      box-shadow: var(--cp-shadow);
+      animation: core-morph 7.2s ease-in-out infinite;
+    }
+    .cinematic-core::before, .cinematic-core::after {
+      content: "";
+      position: absolute;
+      border: 1px solid var(--cp-accent);
+      border-radius: 50%;
+      animation: core-ring 2.4s ease-out infinite;
+    }
+    .cinematic-core::before { inset: -26px; }
+    .cinematic-core::after { inset: -54px; animation-delay: 1.2s; }
+    .cinematic-core span { display: block; font-size: 0.66rem; font-weight: 800; letter-spacing: 0.16em; }
+    .cinematic-core strong { display: block; margin-top: 5px; font-size: 1.25rem; letter-spacing: 0.04em; }
+    .cinematic-core img { width: 72px; height: 62px; object-fit: contain; filter: drop-shadow(0 8px 14px var(--cp-text-muted)); }
+    .signal-word {
+      position: absolute;
+      padding: 8px 11px;
+      border: 1px solid var(--cp-border-strong);
+      border-radius: 0.625rem;
+      background: var(--cp-panel);
+      color: var(--cp-text);
+      font-size: 0.65rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      backdrop-filter: blur(10px);
+      animation: signal-word 7.2s ease-in-out infinite;
+    }
+    .signal-word.w1 { left: 2%; top: 13%; }
+    .signal-word.w2 { left: 4%; bottom: 15%; animation-delay: -1s; }
+    .signal-word.w3 { right: 1%; top: 12%; animation-delay: -2s; }
+    .signal-word.w4 { right: 3%; bottom: 14%; animation-delay: -3s; }
+    .cinematic-outcome {
+      position: absolute;
+      left: 50%;
+      bottom: 5%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 12px;
+    }
+    .cinematic-outcome i {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: var(--cp-border-strong);
+      animation: outcome-sequence 7.2s ease-in-out infinite;
+    }
+    .cinematic-outcome i:nth-child(2) { animation-delay: 450ms; }
+    .cinematic-outcome i:nth-child(3) { animation-delay: 900ms; }
+    .cinematic-outcome i:nth-child(4) { animation-delay: 1350ms; }
+    .cinematic-tagline {
+      position: absolute;
+      left: 50%;
+      bottom: 9%;
+      z-index: 6;
+      transform: translateX(-50%);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--cinematic-muted);
+      font-size: 0.63rem;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      white-space: nowrap;
+      animation: tagline-reveal 7.2s ease-in-out infinite;
+    }
+    .cinematic-tagline i { width: 4px; height: 4px; border-radius: 50%; background: var(--cp-accent); }
+    .cinematic-scroll {
+      position: absolute;
+      right: 28px;
+      bottom: 28px;
+      z-index: 4;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--cp-border);
+      font-size: 0.66rem;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      writing-mode: vertical-rl;
+    }
+    .cinematic-scroll::after { content: ""; width: 1px; height: 56px; background: var(--cp-accent); animation: scroll-line 1.8s ease-in-out infinite; }
+
+    .hero { min-height: 100svh; padding: 128px 0 52px; display: grid; align-items: center; scroll-margin-top: 0; }
+    .hero-grid { display: grid; grid-template-columns: 0.94fr 1.06fr; gap: 48px; align-items: center; }
+    .hero h1 { max-width: 710px; margin: 18px 0 26px; font-size: clamp(3.8rem, 6.7vw, 7rem); line-height: 0.89; letter-spacing: -0.066em; font-weight: 680; }
+    .hero h1 .line { display: block; overflow: hidden; }
+    .hero h1 .line > span { display: block; animation: rise-in 850ms cubic-bezier(.2,.8,.2,1) both; }
+    .hero h1 .line:nth-child(2) > span { animation-delay: 100ms; }
+    .hero h1 .line:nth-child(3) > span { animation-delay: 200ms; }
+    .hero-copy { max-width: 620px; font-size: 1.13rem; color: var(--cp-text-muted); animation: fade-in 1s 360ms both; }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 32px; animation: fade-in 1s 480ms both; }
+    .hero-meta { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 42px; }
+    .hero-meta span { padding: 8px 11px; border: 1px solid var(--cp-border); border-radius: 0.625rem; background: var(--cp-panel); color: var(--cp-text-muted); font-size: 0.7rem; font-weight: 750; }
+    .brand-promise-inline { margin-top: 16px; color: var(--cp-accent); font-size: 0.68rem; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; }
+
+    .radar {
+      min-height: 650px; border: 1px solid var(--cp-border); border-radius: 16px; position: relative; overflow: hidden;
+      background: radial-gradient(circle at 50% 47%, var(--cp-highlight), transparent 34%), var(--cp-text);
+      color: var(--cp-bg); box-shadow: var(--cp-shadow); --radar-color: var(--cp-accent); --radar-next: var(--cp-warning);
+    }
+    .radar::before { content: ""; position: absolute; inset: 22px; border: 1px solid var(--cp-border-strong); border-radius: 16px; opacity: 0.45; }
+    .radar-top { position: absolute; top: 42px; left: 44px; right: 44px; z-index: 5; display: flex; justify-content: space-between; gap: 20px; color: var(--cp-border); font-size: 0.68rem; font-weight: 800; letter-spacing: 0.12em; }
+    .radar-live { display: flex; align-items: center; gap: 8px; color: var(--cp-success); }
+    .radar-live i { width: 8px; height: 8px; border-radius: 50%; background: var(--cp-success); animation: pulse-dot 1.3s ease-in-out infinite; }
+    .radar-field { position: absolute; inset: 74px 26px 110px; display: grid; place-items: center; }
+    .radar-ring { position: absolute; border: 1px solid var(--cp-border-strong); border-radius: 50%; opacity: 0.55; }
+    .radar-ring.r1 { width: 420px; height: 420px; }
+    .radar-ring.r2 { width: 310px; height: 310px; }
+    .radar-ring.r3 { width: 205px; height: 205px; }
+    .radar-scan { position: absolute; width: 420px; height: 420px; border-radius: 50%; overflow: hidden; animation: spin 7s linear infinite; }
+    .radar-scan::before { content: ""; position: absolute; left: 50%; top: 50%; width: 50%; height: 2px; transform-origin: left center; background: linear-gradient(90deg, var(--radar-color), transparent); box-shadow: var(--cp-shadow); }
+    .radar-scan::after { content: ""; position: absolute; left: 50%; top: 50%; width: 48%; height: 48%; border-radius: 0 100% 0 0; background: linear-gradient(135deg, var(--cp-highlight), transparent); }
+    .orbit-dot { position: absolute; width: 13px; height: 13px; border: 3px solid var(--cp-text); border-radius: 50%; background: var(--radar-color); animation: orbit-dot 8s linear infinite; }
+    .orbit-dot.d2 { animation-duration: 11s; animation-direction: reverse; background: var(--radar-next); }
+    .orbit-dot.d3 { animation-duration: 14s; animation-delay: -5s; background: var(--cp-success); }
+    .radar-core {
+      width: 150px; height: 150px; border-radius: 50%; position: relative; z-index: 4;
+      display: grid; place-items: center; text-align: center;
+      background: linear-gradient(135deg, var(--radar-color), var(--radar-next)); color: var(--cp-accent-fg);
+      box-shadow: var(--cp-shadow); transition: background 500ms ease;
+    }
+    .radar-core::before, .radar-core::after { content: ""; position: absolute; border: 1px solid var(--radar-color); border-radius: 50%; animation: core-ring 2.2s ease-out infinite; }
+    .radar-core::before { inset: -20px; } .radar-core::after { inset: -42px; animation-delay: 1.1s; }
+    .radar-core span { display: block; font-size: 0.65rem; font-weight: 800; letter-spacing: 0.12em; }
+    .radar-core strong { display: block; margin-top: 5px; font-size: 1.1rem; }
+    .stage-card {
+      position: absolute; z-index: 5; width: 150px; padding: 12px; border: 1px solid var(--cp-border-strong);
+      border-radius: 0.625rem; background: var(--cp-panel); color: var(--cp-text); backdrop-filter: blur(12px);
+      opacity: 0.45; transform: scale(0.94); transition: opacity 400ms ease, transform 400ms ease, border-color 400ms ease;
+    }
+    .stage-card.active { opacity: 1; transform: scale(1); border-color: var(--radar-color); }
+    .stage-card small { display: block; color: var(--radar-color); font-weight: 800; letter-spacing: 0.08em; }
+    .stage-card strong { display: block; margin-top: 3px; font-size: 0.87rem; }
+    .stage-card.s1 { left: 40px; top: 122px; } .stage-card.s2 { right: 38px; top: 192px; }
+    .stage-card.s3 { right: 40px; bottom: 122px; } .stage-card.s4 { left: 38px; bottom: 162px; }
+    .radar-status {
+      position: absolute; z-index: 6; inset: auto 28px 26px; min-height: 74px; padding: 13px 16px;
+      border: 1px solid var(--cp-border-strong); border-radius: 16px; background: var(--cp-panel); color: var(--cp-text);
+      display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 18px; backdrop-filter: blur(16px);
+    }
+    .radar-copy small { display: block; color: var(--radar-color); font-weight: 800; letter-spacing: 0.12em; }
+    .radar-copy strong { display: block; margin: 2px 0; font-size: 1.04rem; }
+    .radar-copy p { margin: 0; color: var(--cp-text-muted); font-size: 0.74rem; }
+    .radar-count { font-size: 2.2rem; font-weight: 750; color: var(--radar-color); }
+
+    .ticker { overflow: hidden; border-block: 1px solid var(--cp-border); background: var(--cp-text); color: var(--cp-bg); }
+    .ticker-track { width: max-content; display: flex; align-items: center; gap: 28px; padding: 18px 0; animation: marquee 24s linear infinite; font-size: 0.8rem; font-weight: 750; letter-spacing: 0.11em; text-transform: uppercase; }
+    .ticker-track i { width: 8px; height: 8px; border-radius: 50%; background: var(--cp-warning); }
+
+    section { padding: 120px 0; position: relative; }
+    #overview, #services, #approach, #insights, #leadership, #contact { scroll-margin-top: 92px; }
+    h2 { margin: 14px 0 0; font-size: clamp(2.8rem, 5.2vw, 5.5rem); line-height: 0.96; letter-spacing: -0.055em; font-weight: 650; }
+    .section-head { display: grid; grid-template-columns: 0.92fr 1.08fr; gap: 64px; align-items: end; margin-bottom: 58px; }
+    .section-copy { max-width: 650px; color: var(--cp-text-muted); font-size: 1.15rem; }
+
+    #difference {
+      min-height: 100svh;
+      padding: 96px 0 22px;
+      scroll-margin-top: 0;
+      display: grid;
+      align-items: center;
+    }
+    .difference-stage {
+      height: min(820px, calc(100svh - 118px));
+      min-height: 590px;
+      border: 1px solid var(--cp-border);
+      border-radius: 16px;
+      overflow: hidden;
+      background: var(--cp-surface);
+      display: grid;
+      grid-template-columns: 0.72fr 1.28fr;
+    }
+    .difference-copy {
+      padding: clamp(36px, 5vw, 68px);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      border-right: 1px solid var(--cp-border);
+      position: relative;
+      overflow: hidden;
+    }
+    .difference-copy::after { content: "01"; position: absolute; right: -15px; bottom: -80px; color: var(--cp-border); opacity: 0.45; font-size: 15rem; font-weight: 800; letter-spacing: -0.1em; }
+    .difference-copy h2 { font-size: clamp(3rem, 5.1vw, 5.25rem); position: relative; z-index: 2; }
+    .difference-copy p { color: var(--cp-text-muted); font-size: 1.02rem; position: relative; z-index: 2; }
+    .difference-lab { padding: clamp(24px, 3vw, 42px); display: grid; grid-template-rows: 1fr auto; gap: 20px; background: var(--cp-bg-elevated); }
+    .lab-visual { min-height: 0; position: relative; overflow: hidden; border-radius: 16px; background: var(--cp-surface-soft); }
+    .lab-grid { position: absolute; inset: 0; opacity: 0.45; background: linear-gradient(90deg, transparent 49%, var(--cp-border) 50%, transparent 51%), linear-gradient(0deg, transparent 49%, var(--cp-border) 50%, transparent 51%); background-size: 38px 38px; }
+    .lab-hub { position: absolute; left: 45%; top: 50%; width: 66px; height: 66px; transform: translate(-50%, -50%); border-radius: 50%; display: grid; place-items: center; background: var(--cp-text); color: var(--cp-bg); font-size: 0.61rem; font-weight: 800; letter-spacing: 0.08em; z-index: 4; transition: left 850ms cubic-bezier(.2,.8,.2,1), background 450ms ease; }
+    .lab-hub::after { content: ""; position: absolute; inset: -14px; border: 1px solid var(--cp-border-strong); border-radius: 50%; animation: lab-pulse 1.8s ease-out infinite; }
+    .lab-path { position: absolute; z-index: 2; height: 2px; width: var(--w); left: var(--left); top: var(--top); background: var(--cp-border-strong); transform: rotate(var(--angle)); transform-origin: right center; transition: left 850ms cubic-bezier(.2,.8,.2,1), top 850ms cubic-bezier(.2,.8,.2,1), width 850ms ease, transform 850ms cubic-bezier(.2,.8,.2,1), background 450ms ease; }
+    .lab-path::after { content: ""; position: absolute; top: -3px; width: 8px; height: 8px; border-radius: 50%; background: var(--cp-warning); animation: signal 2s linear infinite; animation-delay: calc(var(--i) * -220ms); }
+    .lab-node { position: absolute; z-index: 3; width: 17px; height: 17px; left: var(--x); top: var(--y); border: 4px solid var(--cp-surface-soft); border-radius: 50%; background: var(--cp-border-strong); animation: node-wander 4s ease-in-out infinite alternate; animation-delay: calc(var(--i) * -350ms); transition: left 850ms cubic-bezier(.2,.8,.2,1), top 850ms cubic-bezier(.2,.8,.2,1), background 450ms ease; }
+    .lab-tag { position: absolute; z-index: 4; left: 10%; padding: 7px 9px; border: 1px solid var(--cp-border); border-radius: 0.625rem; background: var(--cp-panel-strong); color: var(--cp-text-muted); font-size: 0.62rem; font-weight: 750; opacity: 0; transform: translateY(8px); transition: opacity 450ms ease 500ms, transform 450ms ease 500ms; }
+    .lab-tag.t1 { top: 16%; } .lab-tag.t2 { top: 37%; } .lab-tag.t3 { top: 58%; } .lab-tag.t4 { top: 79%; }
+    .difference-stage.resolved .lab-hub { left: 80%; background: var(--cp-success); }
+    .difference-stage.resolved .lab-path { left: 16%; width: 64%; transform: rotate(0); background: linear-gradient(90deg, var(--cp-accent), var(--cp-warning), var(--cp-success)); }
+    .difference-stage.resolved .lab-path.p1 { top: 20%; } .difference-stage.resolved .lab-path.p2 { top: 41%; }
+    .difference-stage.resolved .lab-path.p3 { top: 62%; } .difference-stage.resolved .lab-path.p4 { top: 83%; }
+    .difference-stage.resolved .lab-node { left: calc(78% + var(--row) * 1.3%); top: calc(14% + var(--row) * 10%); background: var(--cp-success); animation: node-ready 1.4s ease-in-out infinite alternate; }
+    .difference-stage.resolved .lab-tag { opacity: 1; transform: translateY(0); }
+    .lab-controls { display: grid; grid-template-columns: 1fr auto; gap: 20px; align-items: center; }
+    .lab-state h3 { margin: 0 0 3px; font-size: 1.5rem; letter-spacing: -0.025em; }
+    .lab-state p { margin: 0; color: var(--cp-text-muted); font-size: 0.82rem; }
+    .lab-sequence { min-width: 250px; padding: 7px; border: 1px solid var(--cp-border); border-radius: 0.625rem; background: var(--cp-surface-soft); }
+    .sequence-labels { display: grid; grid-template-columns: 1fr 1fr; gap: 5px; }
+    .sequence-step { padding: 9px 12px; border-radius: 0.625rem; color: var(--cp-text-muted); font-size: 0.76rem; font-weight: 750; text-align: center; transition: background 350ms ease, color 350ms ease, transform 350ms ease; }
+    .sequence-step span { margin-right: 5px; opacity: 0.65; }
+    .sequence-step.active { background: var(--cp-text); color: var(--cp-bg); transform: translateY(-1px); }
+    .difference-stage.resolved .sequence-step.active { background: var(--cp-success); color: var(--cp-accent-fg); }
+    .sequence-track { height: 3px; margin: 7px 5px 1px; overflow: hidden; border-radius: 3px; background: var(--cp-border); }
+    .sequence-fill { width: 0; height: 100%; background: var(--cp-accent); }
+    .difference-stage.resolved .sequence-fill { background: var(--cp-success); }
+
+    .services { background: var(--cp-text); color: var(--cp-bg); overflow: hidden; min-height: 100svh; }
+    .services-word {
+      position: absolute; z-index: 0; right: -5vw; top: 20px; color: var(--cp-border-strong); opacity: 0.16;
+      font-size: 16vw; font-weight: 800; line-height: 1; letter-spacing: -0.08em; transform: translateX(var(--word-shift, 0));
+      transition: transform 80ms linear;
+    }
+    .services .section-head, .service-network { position: relative; z-index: 2; }
+    .services .section-copy { color: var(--cp-border); }
+    .service-network { display: grid; grid-template-columns: repeat(12, 1fr); gap: 14px; }
+    .service-card {
+      grid-column: span 4; min-height: 300px; padding: 26px; border: 1px solid var(--cp-border-strong); border-radius: 16px;
+      display: flex; flex-direction: column; justify-content: space-between; background: var(--cp-surface); color: var(--cp-text);
+      overflow: hidden; position: relative; transition: transform 320ms cubic-bezier(.2,.8,.2,1), border-color 320ms ease, box-shadow 320ms ease;
+    }
+    .service-card.big { grid-column: span 8; }
+    .service-card.active { transform: translateY(-8px); border-color: var(--card-color); box-shadow: var(--cp-shadow); }
+    .service-card::before { content: ""; position: absolute; left: 0; top: 0; width: 0; height: 3px; background: var(--card-color); transition: width 2.6s linear; }
+    .service-card.active::before { width: 100%; }
+    .service-card::after { content: ""; position: absolute; width: 190px; height: 190px; border-radius: 50%; right: -118px; bottom: -118px; background: var(--card-color); transition: transform 500ms ease; }
+    .service-card.active::after { transform: scale(1.7); }
+    .service-card:nth-child(1) { --card-color: var(--cp-accent); } .service-card:nth-child(2) { --card-color: var(--cp-warning); }
+    .service-card:nth-child(3) { --card-color: var(--cp-link); } .service-card:nth-child(4) { --card-color: var(--cp-success); }
+    .service-card:nth-child(5) { --card-color: var(--cp-danger); } .service-card:nth-child(6) { --card-color: var(--cp-accent); }
+    .service-pulse { position: absolute; right: 26px; top: 26px; width: 10px; height: 10px; border-radius: 50%; background: var(--card-color); }
+    .service-card.active .service-pulse { animation: pulse-dot 1s ease-in-out infinite; }
+    .service-num { color: var(--card-color); font-size: 0.7rem; font-weight: 800; letter-spacing: 0.12em; }
+    .service-card h3 { max-width: 500px; margin: 28px 0 13px; font-size: 1.62rem; line-height: 1.08; }
+    .service-card.big h3 { font-size: clamp(2.1rem, 3.3vw, 3.4rem); letter-spacing: -0.035em; }
+    .service-card p { margin: 0; max-width: 520px; color: var(--cp-text-muted); }
+    .service-arrow { position: relative; z-index: 2; align-self: flex-end; font-size: 1.5rem; transition: transform 250ms ease; }
+    .service-card.active .service-arrow { transform: translate(4px, -4px); }
+    .service-story { margin-top: 18px; padding: 15px 18px; border: 1px solid var(--cp-border-strong); border-radius: 16px; display: flex; justify-content: space-between; gap: 20px; color: var(--cp-border); font-size: 0.8rem; }
+    .service-story strong { color: var(--service-color, var(--cp-accent)); }
+
+    .outcome-band { padding: 0; background: linear-gradient(100deg, var(--cp-accent), var(--cp-warning), var(--cp-success), var(--cp-link)); color: var(--cp-accent-fg); }
+    .outcome-grid { display: grid; grid-template-columns: repeat(4, 1fr); }
+    .outcome { padding: 50px 28px; border-right: 1px solid var(--cp-sheen); }
+    .outcome:last-child { border-right: 0; }
+    .outcome strong { display: block; font-size: clamp(2.4rem, 4vw, 4.2rem); line-height: 1; letter-spacing: -0.05em; }
+    .outcome span { display: block; margin-top: 10px; font-size: 0.78rem; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; }
+
+    .journey { overflow: clip; }
+    .journey-layout { display: grid; grid-template-columns: 0.78fr 1.22fr; gap: 80px; align-items: start; }
+    .journey-sticky { position: sticky; top: 118px; align-self: start; }
+    .journey-sticky p { color: var(--cp-text-muted); font-size: 1.08rem; }
+    .journey-gauge { margin-top: 34px; display: flex; align-items: center; gap: 18px; }
+    .gauge-ring { width: 88px; height: 88px; border-radius: 50%; display: grid; place-items: center; position: relative; background: conic-gradient(var(--cp-accent) var(--journey-angle, 0deg), var(--cp-border) 0); transition: background 120ms linear; }
+    .gauge-ring::after { content: ""; position: absolute; inset: 7px; border-radius: 50%; background: var(--cp-bg); }
+    .gauge-ring strong { position: relative; z-index: 2; font-size: 1.3rem; }
+    .gauge-copy small { display: block; color: var(--cp-text-muted); font-weight: 750; text-transform: uppercase; letter-spacing: 0.1em; }
+    .gauge-copy strong { display: block; font-size: 1.18rem; }
+    .journey-list { position: relative; padding-left: 44px; }
+    .journey-rail { position: absolute; left: 12px; top: 0; bottom: 0; width: 3px; background: var(--cp-border); border-radius: 3px; overflow: hidden; }
+    .journey-progress { width: 100%; height: var(--journey-progress, 0%); background: linear-gradient(var(--cp-accent), var(--cp-warning), var(--cp-link), var(--cp-success)); transition: height 100ms linear; }
+    .journey-item {
+      min-height: 340px; padding: 36px 0; border-bottom: 1px solid var(--cp-border); display: grid;
+      grid-template-columns: 74px 1fr; gap: 24px; opacity: 0.32; transform: translateX(0);
+      transition: opacity 420ms ease, transform 420ms cubic-bezier(.2,.8,.2,1);
+    }
+    .journey-item.active { opacity: 1; transform: translateX(10px); }
+    .journey-number { width: 58px; height: 58px; border: 1px solid var(--cp-border-strong); border-radius: 50%; display: grid; place-items: center; font-weight: 800; transition: background 350ms ease, color 350ms ease, border-color 350ms ease; }
+    .journey-item.active .journey-number { background: var(--step-color); color: var(--cp-accent-fg); border-color: var(--step-color); }
+    .journey-item:nth-child(2) { --step-color: var(--cp-accent); } .journey-item:nth-child(3) { --step-color: var(--cp-warning); }
+    .journey-item:nth-child(4) { --step-color: var(--cp-link); } .journey-item:nth-child(5) { --step-color: var(--cp-success); }
+    .journey-item h3 { margin: 4px 0 12px; font-size: 2.25rem; letter-spacing: -0.035em; }
+    .journey-item p { margin: 0; color: var(--cp-text-muted); }
+    .journey-outcome { margin-top: 28px; color: var(--step-color); font-weight: 800; font-size: 0.76rem; letter-spacing: 0.1em; text-transform: uppercase; }
+
+    .leadership { background: var(--cp-bg-elevated); border-block: 1px solid var(--cp-border); overflow: hidden; }
+    .leader-grid { display: grid; grid-template-columns: 0.9fr 1.1fr; gap: 72px; align-items: center; }
+    .leader-visual { min-height: 620px; border: 1px solid var(--cp-border); border-radius: 16px; position: relative; overflow: hidden; background: radial-gradient(circle at 50% 42%, var(--cp-highlight), transparent 34%), linear-gradient(145deg, var(--cp-text), var(--cp-bg-elevated)); }
+    .leader-visual::before { content: "18+"; position: absolute; right: -14px; bottom: -52px; color: var(--cp-bg); opacity: 0.15; font-size: 15rem; line-height: 1; font-weight: 800; letter-spacing: -0.1em; }
+    .leader-orbit { position: absolute; border-radius: 50%; border: 1px solid var(--cp-border-strong); animation: spin 20s linear infinite; }
+    .leader-orbit.one { inset: 12%; border-top-color: var(--cp-accent); } .leader-orbit.two { inset: 25%; animation-direction: reverse; border-bottom-color: var(--cp-warning); }
+    .leader-core { position: absolute; inset: 38%; border-radius: 50%; display: grid; place-items: center; text-align: center; background: var(--cp-accent); color: var(--cp-accent-fg); font-size: 0.72rem; font-weight: 800; letter-spacing: 0.1em; }
+    .leader-tag { position: absolute; padding: 10px 14px; border: 1px solid var(--cp-border-strong); border-radius: 0.625rem; background: var(--cp-panel); color: var(--cp-text); font-size: 0.74rem; font-weight: 750; backdrop-filter: blur(10px); }
+    .leader-tag.t1 { top: 11%; left: 9%; } .leader-tag.t2 { top: 20%; right: 7%; } .leader-tag.t3 { bottom: 18%; left: 6%; } .leader-tag.t4 { bottom: 10%; right: 9%; }
+    .leader-copy blockquote { margin: 34px 0; font-size: clamp(1.8rem, 3vw, 3.1rem); line-height: 1.18; letter-spacing: -0.04em; font-weight: 550; }
+    .leader-copy blockquote::before { content: "“"; display: block; color: var(--cp-accent); font-size: 4rem; line-height: 0.6; }
+    .career-map {
+      margin-top: 32px;
+      padding: 18px;
+      border: 1px solid var(--cp-border);
+      border-radius: 16px;
+      background: var(--cp-surface);
+      overflow: hidden;
+      position: relative;
+    }
+    .career-map::after {
+      content: "";
+      position: absolute;
+      width: 180px;
+      height: 180px;
+      right: -120px;
+      top: -120px;
+      border-radius: 50%;
+      background: var(--cp-accent-soft);
+      animation: cinematic-breathe 5s ease-in-out infinite;
+    }
+    .career-map-head {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 18px;
+      position: relative;
+      z-index: 2;
+    }
+    .career-map-head small { color: var(--cp-text-muted); font-size: 0.63rem; font-weight: 800; letter-spacing: 0.12em; }
+    .career-map-head strong { color: var(--cp-accent); font-size: 0.86rem; letter-spacing: 0.05em; transition: opacity 180ms ease, transform 180ms ease; }
+    .career-map-head strong.changing { opacity: 0; transform: translateY(5px); }
+    .career-track {
+      display: grid;
+      grid-template-columns: repeat(8, 1fr);
+      gap: 7px;
+      position: relative;
+      padding-top: 18px;
+    }
+    .career-beam {
+      position: absolute;
+      left: 4%;
+      right: 4%;
+      top: 4px;
+      height: 2px;
+      border-radius: 2px;
+      background: var(--cp-border);
+    }
+    .career-beam::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: var(--signal-position, 0%);
+      height: 100%;
+      border-radius: 2px;
+      background: linear-gradient(90deg, var(--cp-accent), var(--cp-warning), var(--cp-link), var(--cp-success));
+      transition: width 620ms cubic-bezier(.2,.8,.2,1);
+    }
+    .career-signal {
+      position: absolute;
+      left: var(--signal-position, 0%);
+      top: 50%;
+      width: 12px;
+      height: 12px;
+      transform: translate(-50%, -50%);
+      border: 3px solid var(--cp-surface);
+      border-radius: 50%;
+      background: var(--cp-accent);
+      box-shadow: var(--cp-shadow);
+      transition: left 620ms cubic-bezier(.2,.8,.2,1), background 300ms ease;
+    }
+    .career-signal::after {
+      content: "";
+      position: absolute;
+      inset: -7px;
+      border: 1px solid var(--cp-accent);
+      border-radius: 50%;
+      animation: lab-pulse 1.4s ease-out infinite;
+    }
+    .career-company {
+      min-width: 0;
+      padding: 9px 5px;
+      border: 1px solid var(--cp-border);
+      border-radius: 0.625rem;
+      background: var(--cp-surface-soft);
+      font-size: 0.58rem;
+      font-weight: 800;
+      text-align: center;
+      opacity: 0;
+      transform: translateY(12px);
+      cursor: default;
+      transition: transform 360ms cubic-bezier(.2,.8,.2,1), background 360ms ease, color 360ms ease, border-color 360ms ease;
+    }
+    .career-map.in-view .career-company { animation: company-reveal 540ms cubic-bezier(.2,.8,.2,1) both; animation-delay: calc(var(--i) * 70ms); }
+    .career-company.active-company {
+      opacity: 1;
+      transform: translateY(-5px) scale(1.06);
+      background: var(--cp-accent);
+      color: var(--cp-accent-fg);
+      border-color: var(--cp-accent);
+    }
+
+    .insights {
+      background: var(--cp-text);
+      color: var(--cp-bg);
+      overflow: hidden;
+    }
+    .insights .section-copy { color: var(--cp-border); }
+    .insights-grid { display: grid; grid-template-columns: 1.25fr 0.75fr 0.75fr; gap: 14px; }
+    .insight {
+      min-height: 440px;
+      padding: 28px;
+      border: 1px solid var(--cp-border-strong);
+      border-radius: 16px;
+      background: var(--cp-surface);
+      color: var(--cp-text);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+      overflow: hidden;
+      transition: transform 260ms ease, border-color 260ms ease;
+    }
+    .insight::after {
+      content: "";
+      position: absolute;
+      width: 220px;
+      height: 220px;
+      right: -150px;
+      bottom: -150px;
+      border-radius: 50%;
+      background: var(--insight-color);
+      transition: transform 500ms ease;
+    }
+    .insight:hover { transform: translateY(-8px); border-color: var(--insight-color); }
+    .insight:hover::after { transform: scale(1.8); }
+    .insight.featured { background: var(--cp-accent); color: var(--cp-accent-fg); --insight-color: var(--cp-warning); }
+    .insight:nth-child(2) { --insight-color: var(--cp-link); }
+    .insight:nth-child(3) { --insight-color: var(--cp-success); }
+    .insight-type { font-size: 0.68rem; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; }
+    .insight h3 { margin: 22px 0; font-size: 1.75rem; line-height: 1.08; letter-spacing: -0.03em; }
+    .insight.featured h3 { font-size: clamp(2.3rem, 3.8vw, 3.8rem); }
+    .insight p { color: var(--cp-text-muted); }
+    .insight.featured p { color: var(--cp-sheen); }
+    .insight-link { position: relative; z-index: 2; font-size: 0.82rem; }
+
+    .cta-card { min-height: 600px; padding: clamp(42px, 8vw, 94px); border-radius: 16px; overflow: hidden; position: relative; display: flex; flex-direction: column; justify-content: center; background: var(--cp-text); color: var(--cp-bg); }
+    .cta-card h2, .cta-card p, .cta-card a, .cta-card .label { position: relative; z-index: 2; }
+    .cta-card h2 { max-width: 880px; } .cta-card p { max-width: 620px; color: var(--cp-border); font-size: 1.1rem; }
+    .cta-card .button { margin-top: 26px; width: fit-content; background: var(--cp-accent); color: var(--cp-accent-fg); border-color: var(--cp-accent); }
+    .cta-ribbon { position: absolute; width: 900px; height: 210px; right: -250px; top: 150px; border: 50px solid var(--cp-accent); border-left-color: var(--cp-warning); border-bottom-color: var(--cp-link); border-radius: 50%; transform: rotate(-24deg); animation: ribbon 8s ease-in-out infinite; }
+    footer { padding: 48px 0; }
+    .footer-top { display: flex; justify-content: space-between; gap: 30px; align-items: center; }
+    .footer-bottom { margin-top: 38px; padding-top: 20px; border-top: 1px solid var(--cp-border); display: flex; justify-content: space-between; gap: 20px; color: var(--cp-text-muted); font-size: 0.76rem; }
+
+    @keyframes rise-in { from { transform: translateY(110%); } to { transform: translateY(0); } }
+    @keyframes fade-in { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    @keyframes gradient-shift { to { background-position: 300% 0; } }
+    @keyframes pulse-dot { 50% { transform: scale(1.55); opacity: 0.5; } }
+    @keyframes core-ring { from { transform: scale(0.7); opacity: 0.9; } to { transform: scale(1.3); opacity: 0; } }
+    @keyframes orbit-dot { from { transform: rotate(0) translateX(155px) rotate(0); } to { transform: rotate(360deg) translateX(155px) rotate(-360deg); } }
+    @keyframes marquee { to { transform: translateX(-50%); } }
+    @keyframes lab-pulse { from { transform: scale(0.7); opacity: 0.8; } to { transform: scale(1.4); opacity: 0; } }
+    @keyframes node-wander { to { transform: translate(12px, -10px); } }
+    @keyframes node-ready { to { transform: scale(1.25); } }
+    @keyframes signal { from { left: 0; opacity: 0; } 15% { opacity: 1; } 85% { opacity: 1; } to { left: 100%; opacity: 0; } }
+    @keyframes ribbon { 50% { transform: rotate(-19deg) scale(1.08); } }
+    @keyframes grid-drift { to { background-position: 64px 64px; } }
+    @keyframes cinematic-breathe { 50% { transform: scale(1.16); opacity: 0.7; } }
+    @keyframes raw-signal { to { stroke-dashoffset: -190; } }
+    @keyframes draw-value {
+      0%, 12% { stroke-dasharray: 0 1200; opacity: 0; }
+      42%, 78% { stroke-dasharray: 1200 0; opacity: 1; }
+      100% { stroke-dasharray: 1200 0; opacity: 0; }
+    }
+    @keyframes particle-flow { to { offset-distance: 100%; } }
+    @keyframes core-morph {
+      0%, 16% { border-radius: 50%; transform: translate(-50%, -50%) scale(0.82); filter: saturate(0.65); }
+      46%, 82% { border-radius: 24%; transform: translate(-50%, -50%) scale(1); filter: saturate(1.15); }
+      100% { border-radius: 50%; transform: translate(-50%, -50%) scale(0.82); filter: saturate(0.65); }
+    }
+    @keyframes signal-word {
+      0%, 10% { opacity: 0.25; transform: translateY(12px); }
+      28%, 72% { opacity: 1; transform: translateY(0); }
+      100% { opacity: 0.25; transform: translateY(-10px); }
+    }
+    @keyframes outcome-sequence {
+      0%, 20% { background: var(--cp-border-strong); transform: scale(1); }
+      42%, 76% { background: var(--cp-success); transform: scale(1.45); }
+      100% { background: var(--cp-border-strong); transform: scale(1); }
+    }
+    @keyframes scroll-line { 50% { transform: scaleY(0.45); transform-origin: top; } }
+    @keyframes tagline-reveal {
+      0%, 18% { opacity: 0; transform: translate(-50%, 12px); letter-spacing: 0.2em; }
+      42%, 82% { opacity: 1; transform: translate(-50%, 0); letter-spacing: 0.12em; }
+      100% { opacity: 0; transform: translate(-50%, -8px); }
+    }
+    @keyframes company-reveal {
+      from { opacity: 0; transform: translateY(18px) rotateX(-18deg); }
+      to { opacity: 1; transform: translateY(0) rotateX(0); }
+    }
+
+    @media (max-width: 1020px) {
+      .hero-grid, .section-head, .leader-grid, .journey-layout { grid-template-columns: 1fr; }
+      .radar { max-width: 760px; width: 100%; margin: 0 auto; }
+      .difference-stage { height: auto; max-height: none; grid-template-columns: 1fr; }
+      .difference-copy { border-right: 0; border-bottom: 1px solid var(--cp-border); }
+      .difference-lab { min-height: 620px; }
+      .service-card, .service-card.big { grid-column: span 6; }
+      .journey-sticky { position: static; }
+    }
+    @media (max-width: 760px) {
+      .shell { width: min(100% - 24px, 1240px); }
+      .nav-links > a:not(.button) { display: none; }
+      .nav-wrap { min-height: 58px; padding: 7px 8px 7px 12px; }
+      .brand { font-size: 0.72rem; gap: 7px; }
+      .mark { width: 36px; height: 34px; }
+      .nav-wrap .button { min-height: 40px; padding-inline: 13px; }
+      .cinematic { min-height: 100svh; }
+      .signal-world { width: 100vw; height: 72vh; }
+      .cinematic-tagline { bottom: 13%; font-size: 0.48rem; gap: 6px; letter-spacing: 0.07em; }
+      .cinematic-scroll { display: none; }
+      .signal-word.w1 { left: 4%; }
+      .signal-word.w2 { left: 5%; }
+      .signal-word.w3 { right: 4%; }
+      .signal-word.w4 { right: 5%; }
+      .hero { padding: 104px 0 54px; }
+      .hero-grid { gap: 34px; }
+      .hero h1 { font-size: clamp(3.1rem, 15vw, 4.6rem); }
+      .hero-copy { font-size: 1rem; }
+      .radar { min-height: 540px; }
+      .radar-ring.r1, .radar-scan { width: 310px; height: 310px; }
+      .radar-ring.r2 { width: 238px; height: 238px; }
+      .radar-ring.r3 { width: 165px; height: 165px; }
+      .radar-core { width: 122px; height: 122px; }
+      .stage-card { width: 112px; padding: 8px; }
+      .stage-card strong { font-size: 0.72rem; }
+      .stage-card.s1 { left: 20px; top: 114px; } .stage-card.s2 { right: 20px; top: 168px; }
+      .stage-card.s3 { right: 20px; bottom: 112px; } .stage-card.s4 { left: 20px; bottom: 145px; }
+      .radar-status { inset: auto 14px 14px; padding: 11px 12px; }
+      section { padding: 74px 0; }
+      h2 { font-size: clamp(2.55rem, 12vw, 4rem); }
+      #difference { padding-top: 92px; }
+      .difference-copy { padding: 34px 25px; }
+      .difference-copy h2 { font-size: clamp(2.7rem, 12vw, 4rem); }
+      .difference-lab { min-height: 510px; }
+      .lab-visual { min-height: 340px; }
+      .lab-controls { grid-template-columns: 1fr; }
+      .service-card, .service-card.big { grid-column: span 12; }
+      .service-card { min-height: 235px; padding: 22px; }
+      .service-card.big h3 { font-size: 2.25rem; }
+      .outcome-grid { grid-template-columns: 1fr 1fr; }
+      .outcome:nth-child(2) { border-right: 0; } .outcome:nth-child(-n+2) { border-bottom: 1px solid var(--cp-sheen); }
+      .outcome { padding: 34px 22px; }
+      .journey-layout { gap: 40px; }
+      .journey-gauge { margin-top: 24px; }
+      .journey-item { min-height: 230px; padding-block: 28px; }
+      .journey-item h3 { font-size: 1.85rem; }
+      .leader-grid { gap: 38px; }
+      .leader-visual { min-height: 420px; }
+      .leader-copy blockquote { font-size: 1.65rem; }
+      .career-track { grid-template-columns: repeat(4, 1fr); row-gap: 10px; }
+      .career-beam { display: none; }
+      .insights-grid { grid-template-columns: 1fr; }
+      .insight { min-height: 290px; }
+      .footer-top, .footer-bottom { flex-direction: column; align-items: flex-start; }
+    }
+    @media (max-width: 500px) {
+      .brand > span:last-child { display: none; }
+      .radar-status { grid-template-columns: 1fr; }
+      .radar-count { display: none; }
+      .stage-card { font-size: 0.62rem; width: 108px; }
+      .difference-copy { padding: 30px 24px; }
+      .difference-lab { padding: 14px; min-height: 500px; }
+      .cinematic-core { width: 126px; height: 126px; }
+      .cinematic-core img { width: 60px; height: 52px; }
+      .signal-word { font-size: 0.54rem; padding: 6px 8px; }
+      .cinematic-tagline { white-space: normal; width: 74%; justify-content: center; text-align: center; line-height: 1.5; }
+      .outcome-grid { grid-template-columns: 1fr; }
+      .outcome { border-right: 0; border-bottom: 1px solid var(--cp-sheen); }
+      .journey-list { padding-left: 30px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation: none !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; }
+    }
+  </style>
+</head>
+<body>
+  <div class="progress" id="progress"></div>
+  <nav><div class="shell nav-wrap">
+    <a class="brand" href="#top"><span class="mark"><img src="nexture-mark-transparent.png" alt=""></span><span>NEXTURE CONSULTING</span></a>
+    <div class="nav-links"><a href="#overview">Overview</a><a href="#difference">Difference</a><a href="#services">Services</a><a href="#approach">Approach</a><a href="#insights">Insights</a><a href="#leadership">Leadership</a><a class="button" href="#contact">Let's talk <span class="arrow">↗</span></a></div>
+  </div></nav>
+
+  <main id="top">
+    <section class="cinematic" aria-label="Abstract animation showing disconnected signals becoming connected business value">
+      <div class="cinematic-grid"></div>
+      <div class="cinematic-glow"></div>
+      <div class="signal-world">
+        <svg viewBox="0 0 1120 680" preserveAspectRatio="none" aria-hidden="true">
+          <defs>
+            <linearGradient id="valueGradient" x1="0" x2="1">
+              <stop offset="0" stop-color="var(--cp-accent)"></stop>
+              <stop offset="0.38" stop-color="var(--cp-warning)"></stop>
+              <stop offset="0.7" stop-color="var(--cp-link)"></stop>
+              <stop offset="1" stop-color="var(--cp-success)"></stop>
+            </linearGradient>
+          </defs>
+          <path class="raw-path" d="M70 105 C240 40 220 350 440 345 S650 140 780 240 S910 470 1050 350"></path>
+          <path class="raw-path" d="M80 560 C250 670 310 410 445 350 S620 360 780 245 S900 120 1040 190"></path>
+          <path class="raw-path" d="M50 330 C220 180 310 510 445 350 S640 210 780 245 S920 340 1070 90"></path>
+          <path class="raw-path" d="M120 210 C260 300 320 280 445 350 S630 500 780 245 S930 210 1030 530"></path>
+          <path class="value-path" d="M70 105 C240 40 220 350 440 345 S650 140 780 240 S910 470 1050 350"></path>
+          <path class="value-path" d="M80 560 C250 670 310 410 445 350 S620 360 780 245 S900 120 1040 190"></path>
+          <circle class="signal-particle p1" r="7"></circle><circle class="signal-particle p2" r="7"></circle>
+          <circle class="signal-particle p3" r="7"></circle><circle class="signal-particle p4" r="7"></circle>
+        </svg>
+        <span class="signal-word w1">STRATEGY</span><span class="signal-word w2">PEOPLE</span>
+        <span class="signal-word w3">TECHNOLOGY</span><span class="signal-word w4">DATA</span>
+        <div class="cinematic-core"><div><img src="nexture-mark-transparent.png" alt="Nexture"><strong>VALUE</strong></div></div>
+        <div class="cinematic-outcome" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+      </div>
+      <div class="cinematic-tagline"><span>TRANSFORMING COMPLEXITY</span><i></i><span>DELIVERING VALUE</span><i></i><span>DRIVING IMPACT</span></div>
+      <a class="cinematic-scroll" href="#overview">SCROLL TO DISCOVER</a>
+    </section>
+
+    <header class="hero" id="overview">
+      <div class="shell hero-grid">
+        <div>
+          <div class="label">Enterprise transformation & delivery</div>
+          <h1><span class="line"><span>Complexity,</span></span><span class="line"><span>transformed into</span></span><span class="line"><span class="gradient-text">business value.</span></span></h1>
+          <p class="hero-copy">Nexture works at critical points of change—uniting strategy, leadership, technology, data and delivery into one clear path forward.</p>
+          <div class="hero-actions"><a class="button" href="#contact">Start a conversation <span class="arrow">↗</span></a><a class="button light" href="#difference">See the transformation <span>↓</span></a></div>
+          <div class="hero-meta"><span>Strategy to execution</span><span>Senior-led delivery</span><span>Measurable outcomes</span></div>
+          <div class="brand-promise-inline">Transforming Complexity · Delivering Value · Driving Impact</div>
+        </div>
+        <div class="radar" id="radar" aria-label="Animated transformation radar showing four stages from discovery to sustainable impact">
+          <div class="radar-top"><span>SIGNAL TO VALUE</span><span class="radar-live"><i></i> ACTIVE TRANSFORMATION</span></div>
+          <div class="radar-field">
+            <div class="radar-ring r1"></div><div class="radar-ring r2"></div><div class="radar-ring r3"></div><div class="radar-scan"></div>
+            <span class="orbit-dot d1"></span><span class="orbit-dot d2"></span><span class="orbit-dot d3"></span>
+            <div class="radar-core"><div><span>NEXTURE</span><strong>DISCOVER</strong></div></div>
+          </div>
+          <div class="stage-card s1 active"><small>01</small><strong>Discover complexity</strong></div>
+          <div class="stage-card s2"><small>02</small><strong>Design direction</strong></div>
+          <div class="stage-card s3"><small>03</small><strong>Deliver momentum</strong></div>
+          <div class="stage-card s4"><small>04</small><strong>Sustain value</strong></div>
+          <div class="radar-status"><div class="radar-copy"><small>PHASE 01 · DISCOVER</small><strong>See the whole transformation landscape</strong><p>Reveal the priorities, constraints and decisions shaping success.</p></div><span class="radar-count">01</span></div>
+        </div>
+      </div>
+    </header>
+
+    <div class="ticker" aria-hidden="true"><div class="ticker-track">
+      <span>Enterprise transformation</span><i></i><span>Program leadership</span><i></i><span>M&A integration</span><i></i><span>IT / OT</span><i></i><span>Data & analytics</span><i></i><span>Technology advisory</span><i></i>
+      <span>Enterprise transformation</span><i></i><span>Program leadership</span><i></i><span>M&A integration</span><i></i><span>IT / OT</span><i></i><span>Data & analytics</span><i></i><span>Technology advisory</span><i></i>
+    </div></div>
+
+    <section id="difference">
+      <div class="shell difference-stage" id="difference-stage">
+        <div class="difference-copy">
+          <div class="label">The challenge</div><h2>Many moving parts.<br>One outcome.</h2>
+          <p>Transformation becomes difficult when priorities, people, systems and decisions move in different directions. Nexture creates the connection that turns activity into progress.</p>
+        </div>
+        <div class="difference-lab">
+          <div class="lab-visual" aria-label="Animated complexity reorganising into four aligned workstreams">
+            <div class="lab-grid"></div>
+            <span class="lab-path p1" style="--w:54%;--left:8%;--top:18%;--angle:27deg;--i:1"></span><span class="lab-path p2" style="--w:61%;--left:3%;--top:39%;--angle:8deg;--i:2"></span>
+            <span class="lab-path p3" style="--w:58%;--left:5%;--top:62%;--angle:-13deg;--i:3"></span><span class="lab-path p4" style="--w:53%;--left:8%;--top:83%;--angle:-29deg;--i:4"></span>
+            <span class="lab-node" style="--x:14%;--y:12%;--row:1;--i:1"></span><span class="lab-node" style="--x:68%;--y:17%;--row:2;--i:2"></span><span class="lab-node" style="--x:27%;--y:35%;--row:3;--i:3"></span>
+            <span class="lab-node" style="--x:75%;--y:46%;--row:4;--i:4"></span><span class="lab-node" style="--x:18%;--y:61%;--row:5;--i:5"></span><span class="lab-node" style="--x:61%;--y:72%;--row:6;--i:6"></span><span class="lab-node" style="--x:34%;--y:87%;--row:7;--i:7"></span>
+            <span class="lab-hub">VALUE</span><span class="lab-tag t1">Clear priorities</span><span class="lab-tag t2">Aligned decisions</span><span class="lab-tag t3">Visible ownership</span><span class="lab-tag t4">Delivery rhythm</span>
+          </div>
+          <div class="lab-controls">
+            <div class="lab-state"><h3 id="lab-title">Complexity creates friction.</h3><p id="lab-copy">Disconnected priorities create noise, rework and delivery drag.</p></div>
+            <div class="lab-sequence" aria-label="Automatic transformation sequence">
+              <div class="sequence-labels"><div class="sequence-step active" data-state="complex"><span>01</span> Complexity</div><div class="sequence-step" data-state="clarity"><span>02</span> With Nexture</div></div>
+              <div class="sequence-track"><div class="sequence-fill" id="sequence-fill"></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="services" id="services">
+      <div class="services-word" id="services-word">NEXTURE</div>
+      <div class="shell">
+        <div class="section-head"><div><div class="label">What we do</div><h2>One connected transformation partner.</h2></div><p class="section-copy">Senior expertise across the full transformation journey—from the decisions that shape direction to the leadership that sustains delivery.</p></div>
+        <div class="service-network">
+          <article class="service-card big active" data-story="Connect enterprise ambition to a practical transformation system."><span class="service-pulse"></span><div><div class="service-num">01 / ENTERPRISE DIGITAL TRANSFORMATION</div><h3>Turn transformation ambition into coordinated enterprise movement.</h3><p>Strategy, roadmaps, operating models, governance and executive leadership connected around measurable value.</p></div><span class="service-arrow">↗</span></article>
+          <article class="service-card" data-story="Create clarity, accountability and delivery momentum."><span class="service-pulse"></span><div><div class="service-num">02 / PROGRAM LEADERSHIP</div><h3>Restore clarity and momentum.</h3><p>Senior program and portfolio leadership for complex delivery environments.</p></div><span class="service-arrow">↗</span></article>
+          <article class="service-card" data-story="Turn governance into a faster decision-making capability."><span class="service-pulse"></span><div><div class="service-num">03 / PMO</div><h3>Governance that enables decisions.</h3><p>High-performing PMOs that create visibility without unnecessary administration.</p></div><span class="service-arrow">↗</span></article>
+          <article class="service-card big" data-story="Protect continuity while businesses, systems and data converge."><span class="service-pulse"></span><div><div class="service-num">04 / M&A TECHNOLOGY INTEGRATION</div><h3>Protect continuity while businesses, systems and data converge.</h3><p>Due diligence, integration, separation, transition and cutover leadership.</p></div><span class="service-arrow">↗</span></article>
+          <article class="service-card" data-story="Connect operational environments with enterprise intelligence."><span class="service-pulse"></span><div><div class="service-num">05 / IT · OT · DATA</div><h3>Connect operations with enterprise intelligence.</h3><p>Technology and data foundations that improve visibility and performance.</p></div><span class="service-arrow">↗</span></article>
+          <article class="service-card" data-story="Make confident decisions and create adoption that lasts."><span class="service-pulse"></span><div><div class="service-num">06 / ADVISORY & CHANGE</div><h3>Confident decisions. Lasting adoption.</h3><p>Independent advisory and people-centred transformation.</p></div><span class="service-arrow">↗</span></article>
+        </div>
+        <div class="service-story"><span>ACTIVE VALUE STREAM</span><strong id="service-story">Connect enterprise ambition to a practical transformation system.</strong></div>
+      </div>
+    </section>
+
+    <section class="outcome-band" aria-label="Transformation outcomes"><div class="shell outcome-grid"><div class="outcome"><strong>01</strong><span>Clarity</span></div><div class="outcome"><strong>02</strong><span>Direction</span></div><div class="outcome"><strong>03</strong><span>Momentum</span></div><div class="outcome"><strong>04</strong><span>Impact</span></div></div></section>
+
+    <section class="journey" id="approach">
+      <div class="shell journey-layout">
+        <div class="journey-sticky"><div class="label">How we work</div><h2>Transformation is a journey—not a handover.</h2><p>Nexture works alongside leaders and teams from first decision to sustained impact, building capability rather than dependency.</p><div class="journey-gauge"><div class="gauge-ring" id="gauge-ring"><strong id="gauge-number">01</strong></div><div class="gauge-copy"><small>Current phase</small><strong id="gauge-name">Discover</strong></div></div></div>
+        <div class="journey-list" id="journey-list">
+          <div class="journey-rail"><div class="journey-progress"></div></div>
+          <article class="journey-item active"><div class="journey-number">01</div><div><h3>Discover</h3><p>Understand business objectives, constraints and transformation priorities.</p><div class="journey-outcome">Outcome · Clarity</div></div></article>
+          <article class="journey-item"><div class="journey-number">02</div><div><h3>Design</h3><p>Shape practical strategies, roadmaps, governance and delivery approaches.</p><div class="journey-outcome">Outcome · Direction</div></div></article>
+          <article class="journey-item"><div class="journey-number">03</div><div><h3>Deliver</h3><p>Lead execution across people, technology, governance, vendors and stakeholders.</p><div class="journey-outcome">Outcome · Momentum</div></div></article>
+          <article class="journey-item"><div class="journey-number">04</div><div><h3>Sustain</h3><p>Embed capability and ensure transformation creates lasting business value.</p><div class="journey-outcome">Outcome · Sustainable impact</div></div></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="insights" id="insights">
+      <div class="shell">
+        <div class="section-head">
+          <div><div class="label">Insights</div><h2>Practical thinking for complex change.</h2></div>
+          <p class="section-copy">Perspectives shaped by leading transformation—not observing it from the sidelines.</p>
+        </div>
+        <div class="insights-grid">
+          <article class="insight featured">
+            <div><span class="insight-type">Featured perspective</span><h3>From strategy to execution: closing the transformation gap.</h3><p>Why momentum is lost between executive intent and delivery reality—and how leaders can reconnect the two.</p></div>
+            <span class="insight-link">Read insight ↗</span>
+          </article>
+          <article class="insight">
+            <div><span class="insight-type">Program leadership</span><h3>Recovering a program that has lost momentum.</h3><p>Practical intervention at the point where governance, confidence and delivery begin to fracture.</p></div>
+            <span class="insight-link">Read insight ↗</span>
+          </article>
+          <article class="insight">
+            <div><span class="insight-type">PMO</span><h3>Building a PMO that actually creates value.</h3><p>Moving beyond reporting to enable decisions, accountability and strategic alignment.</p></div>
+            <span class="insight-link">Read insight ↗</span>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="leadership" id="leadership">
+      <div class="shell leader-grid">
+        <div class="leader-visual" aria-label="Connected transformation leadership graphic with 18 years experience"><div class="leader-orbit one"></div><div class="leader-orbit two"></div><div class="leader-core">18+ YEARS<br>IN MOTION</div><span class="leader-tag t1">Executive strategy</span><span class="leader-tag t2">Enterprise delivery</span><span class="leader-tag t3">Complex industries</span><span class="leader-tag t4">Trusted leadership</span></div>
+        <div class="leader-copy">
+          <div class="label">Leadership grounded in delivery</div><h2>Lakshmi Thiagarajan</h2><p class="muted">Founder & Principal Consultant</p>
+          <blockquote>Successful transformation is rarely about technology alone. It is about creating clarity, aligning people and turning strategy into action.</blockquote>
+          <p class="muted">More than 18 years leading enterprise transformation across mining, manufacturing, financial services, retail, government and consulting.</p>
+          <div class="career-map" aria-label="Experience network across major organisations">
+            <div class="career-map-head"><small>EXPERIENCE NETWORK · SIGNAL IN MOTION</small><strong id="company-focus">DYNO NOBEL</strong></div>
+            <div class="career-track">
+              <div class="career-beam"><i class="career-signal"></i></div>
+              <span class="career-company active-company">DYNO NOBEL</span><span class="career-company">SOUTH32</span><span class="career-company">NTT</span><span class="career-company">SUNCORP</span>
+              <span class="career-company">ANZ</span><span class="career-company">DELOITTE</span><span class="career-company">AIG</span><span class="career-company">KPMG</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact"><div class="shell"><div class="cta-card"><div class="cta-ribbon" aria-hidden="true"></div><div class="label">Your next inflection point</div><h2>Ready to transform what’s next?</h2><p>Transformation challenges rarely fit neatly into a form. Tell us what you’re working through, and let’s create a clear path forward.</p><a class="button" href="mailto:hello@nextureconsulting.com">Start the conversation <span class="arrow">↗</span></a></div></div></section>
+  </main>
+
+  <footer><div class="shell"><div class="footer-top"><a class="brand" href="#top"><span class="mark"><img src="nexture-mark-transparent.png" alt=""></span><span>NEXTURE CONSULTING</span></a><span class="muted">Transforming Complexity · Delivering Value · Driving Impact</span></div><div class="footer-bottom"><span>© Nexture Consulting. All rights reserved.</span><span>Enterprise Transformation · Program Leadership · Technology Advisory</span></div></div></footer>
+
+  <script>
+    const progress = document.getElementById("progress");
+    const servicesWord = document.getElementById("services-word");
+    const servicesSection = document.getElementById("services");
+    const journeyList = document.getElementById("journey-list");
+    const journeyItems = [...document.querySelectorAll(".journey-item")];
+    const gaugeRing = document.getElementById("gauge-ring");
+    const gaugeNumber = document.getElementById("gauge-number");
+    const gaugeName = document.getElementById("gauge-name");
+    const journeyNames = ["Discover", "Design", "Deliver", "Sustain"];
+    const leadershipSection = document.getElementById("leadership");
+    const careerMap = document.querySelector(".career-map");
+    const careerCompanies = [...careerMap.querySelectorAll(".career-company")];
+    const companyFocus = document.getElementById("company-focus");
+    careerCompanies.forEach((company, index) => company.style.setProperty("--i", index));
+
+    let ticking = false;
+    const updateScrollStories = () => {
+      const max = document.documentElement.scrollHeight - innerHeight;
+      progress.style.width = `${max > 0 ? (scrollY / max) * 100 : 0}%`;
+
+      const servicesRect = servicesSection.getBoundingClientRect();
+      const servicesProgress = Math.max(0, Math.min(1, (innerHeight - servicesRect.top) / (innerHeight + servicesRect.height)));
+      servicesWord.style.setProperty("--word-shift", `${(servicesProgress - 0.5) * 130}px`);
+
+      const listRect = journeyList.getBoundingClientRect();
+      const start = innerHeight * 0.5;
+      const raw = (start - listRect.top) / Math.max(1, listRect.height - innerHeight * 0.35);
+      const journeyProgress = Math.max(0, Math.min(1, raw));
+      journeyList.style.setProperty("--journey-progress", `${journeyProgress * 100}%`);
+      gaugeRing.style.setProperty("--journey-angle", `${journeyProgress * 360}deg`);
+      const index = Math.min(3, Math.max(0, Math.round(journeyProgress * 3)));
+      journeyItems.forEach((item, i) => item.classList.toggle("active", i === index));
+      gaugeNumber.textContent = `0${index + 1}`;
+      gaugeName.textContent = journeyNames[index];
+
+      ticking = false;
+    };
+    addEventListener("scroll", () => {
+      if (!ticking) {
+        requestAnimationFrame(updateScrollStories);
+        ticking = true;
+      }
+    }, { passive: true });
+    addEventListener("resize", updateScrollStories);
+    updateScrollStories();
+
+    let companyIndex = 0;
+    let companyTimer;
+    const spotlightCompany = (index) => {
+      companyIndex = index;
+      careerCompanies.forEach((company, i) => company.classList.toggle("active-company", i === index));
+      careerMap.style.setProperty("--signal-position", `${(index / (careerCompanies.length - 1)) * 100}%`);
+      companyFocus.classList.add("changing");
+      setTimeout(() => {
+        companyFocus.textContent = careerCompanies[index].textContent;
+        companyFocus.classList.remove("changing");
+      }, 170);
+    };
+    const startExperienceNetwork = () => {
+      clearInterval(companyTimer);
+      spotlightCompany(companyIndex);
+      companyTimer = setInterval(() => spotlightCompany((companyIndex + 1) % careerCompanies.length), 1450);
+    };
+    const revealExperienceNetwork = () => {
+      careerMap.classList.remove("in-view");
+      void careerMap.offsetWidth;
+      careerMap.classList.add("in-view");
+      companyIndex = 0;
+      startExperienceNetwork();
+    };
+    const leadershipObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) revealExperienceNetwork();
+        else {
+          clearInterval(companyTimer);
+          careerMap.classList.remove("in-view");
+        }
+      });
+    }, { threshold: 0.25 });
+    leadershipObserver.observe(leadershipSection);
+    careerCompanies.forEach((company, index) => {
+      company.addEventListener("mouseenter", () => {
+        clearInterval(companyTimer);
+        spotlightCompany(index);
+      });
+    });
+    careerMap.addEventListener("mouseleave", startExperienceNetwork);
+    addEventListener("focus", () => {
+      const rect = leadershipSection.getBoundingClientRect();
+      if (rect.top < innerHeight && rect.bottom > 0) revealExperienceNetwork();
+    });
+
+    const radar = document.getElementById("radar");
+    const radarStages = [...document.querySelectorAll(".stage-card")];
+    const radarCore = document.querySelector(".radar-core strong");
+    const radarCopy = document.querySelector(".radar-copy");
+    const radarCount = document.querySelector(".radar-count");
+    const radarPhases = [
+      { name: "DISCOVER", line: "PHASE 01 · DISCOVER", title: "See the whole transformation landscape", copy: "Reveal the priorities, constraints and decisions shaping success.", color: "var(--cp-accent)", next: "var(--cp-warning)" },
+      { name: "DESIGN", line: "PHASE 02 · DESIGN", title: "Turn complexity into one direction", copy: "Shape the roadmap, governance and operating model for confident movement.", color: "var(--cp-warning)", next: "var(--cp-link)" },
+      { name: "DELIVER", line: "PHASE 03 · DELIVER", title: "Convert direction into momentum", copy: "Align people, technology and accountability around coordinated execution.", color: "var(--cp-link)", next: "var(--cp-success)" },
+      { name: "SUSTAIN", line: "PHASE 04 · SUSTAIN", title: "Make the value endure", copy: "Embed capability, adoption and outcomes that continue after handover.", color: "var(--cp-success)", next: "var(--cp-accent)" }
+    ];
+    let radarIndex = 0;
+    const showRadarPhase = (index) => {
+      radarIndex = index;
+      const phase = radarPhases[index];
+      radar.style.setProperty("--radar-color", phase.color);
+      radar.style.setProperty("--radar-next", phase.next);
+      radarCore.textContent = phase.name;
+      radarCopy.querySelector("small").textContent = phase.line;
+      radarCopy.querySelector("strong").textContent = phase.title;
+      radarCopy.querySelector("p").textContent = phase.copy;
+      radarCount.textContent = `0${index + 1}`;
+      radarStages.forEach((stage, i) => stage.classList.toggle("active", i === index));
+    };
+    radarStages.forEach((stage, index) => stage.addEventListener("click", () => showRadarPhase(index)));
+    const radarTimer = setInterval(() => showRadarPhase((radarIndex + 1) % radarPhases.length), 3300);
+
+    const differenceStage = document.getElementById("difference-stage");
+    const labTitle = document.getElementById("lab-title");
+    const labCopy = document.getElementById("lab-copy");
+    const sequenceSteps = [...document.querySelectorAll(".sequence-step")];
+    const sequenceFill = document.getElementById("sequence-fill");
+    let differenceTimer;
+    let differenceRunning = false;
+
+    const animateSequenceFill = (duration) => {
+      sequenceFill.style.transition = "none";
+      sequenceFill.style.width = "0";
+      requestAnimationFrame(() => requestAnimationFrame(() => {
+        sequenceFill.style.transition = `width ${duration}ms linear`;
+        sequenceFill.style.width = "100%";
+      }));
+    };
+
+    const showDifferenceState = (resolved, duration) => {
+      differenceStage.classList.toggle("resolved", resolved);
+      sequenceSteps.forEach((step) => step.classList.toggle("active", step.dataset.state === (resolved ? "clarity" : "complex")));
+      labTitle.textContent = resolved ? "Clarity creates momentum." : "Complexity creates friction.";
+      labCopy.textContent = resolved ? "Connected priorities create visible ownership and coordinated movement." : "Disconnected priorities create noise, rework and delivery drag.";
+      animateSequenceFill(duration);
+    };
+
+    const playDifferenceSequence = () => {
+      clearTimeout(differenceTimer);
+      showDifferenceState(false, 4200);
+      differenceTimer = setTimeout(() => {
+        showDifferenceState(true, 5200);
+        differenceTimer = setTimeout(playDifferenceSequence, 5200);
+      }, 4200);
+    };
+
+    const differenceObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting && !differenceRunning) {
+          differenceRunning = true;
+          playDifferenceSequence();
+        } else if (!entry.isIntersecting && differenceRunning) {
+          differenceRunning = false;
+          clearTimeout(differenceTimer);
+          showDifferenceState(false, 0);
+        }
+      });
+    }, { threshold: 0.45 });
+    differenceObserver.observe(differenceStage);
+
+    const serviceCards = [...document.querySelectorAll(".service-card")];
+    const serviceStory = document.getElementById("service-story");
+    let serviceIndex = 0;
+    const activateService = (index) => {
+      serviceIndex = index;
+      serviceCards.forEach((card, i) => card.classList.toggle("active", i === index));
+      const card = serviceCards[index];
+      serviceStory.textContent = card.dataset.story;
+      serviceStory.parentElement.style.setProperty("--service-color", getComputedStyle(card).getPropertyValue("--card-color"));
+    };
+    serviceCards.forEach((card, index) => {
+      card.addEventListener("mouseenter", () => activateService(index));
+      card.addEventListener("focusin", () => activateService(index));
+    });
+    const serviceTimer = setInterval(() => activateService((serviceIndex + 1) % serviceCards.length), 2800);
+
+    if (matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      clearInterval(radarTimer);
+      clearInterval(serviceTimer);
+      clearInterval(companyTimer);
+    }
+  </script>
+</body>
+</html>
